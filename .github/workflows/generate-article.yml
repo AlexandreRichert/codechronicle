@@ -6,6 +6,7 @@ on:
 
 permissions:
   contents: write
+  issues: write
   pull-requests: write
 
 jobs: 
@@ -29,10 +30,10 @@ jobs:
           git config --global user.email "actions@github.com"
           git add blog/
           git commit -m "Mise à jour de l'article généré"
-          git push origin main
+          git push origin HEAD:${{ github.head_ref }}
 
       - name : Sauvegarder l'arcticle en artefact
         uses: actions/upload-artifact@v4
         with:
-          name: article generer
+          name: article généré
           path: blog/
