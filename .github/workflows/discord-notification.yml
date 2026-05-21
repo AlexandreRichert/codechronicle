@@ -1,0 +1,34 @@
+name: Notification Discord après génération d'article
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  send-discord-message:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cloner le repo github
+        uses: actions/checkout@v4
+
+      - name: Reprendre les informations de l'article
+        run : |
+          ARTICLE_TITLE=$(cat blog/article.md | grep -m 1 "^# " | sed 's/# //')
+          ARTICLE_SUMMARY=$(cat blog/article.md | grep -m 1 "^> " | sed 's/> //')
+          echo "ARTICLE_TITLE=$ARTICLE_TITLE" >> $GITHUB_ENV
+          echo "ARTICLE_SUMMARY=$ARTICLE_SUMMARY" >> $GITHUB_ENV
+
+      - name: Envoyer une notification sur Discord
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          PAYLOAD=$(jq -n \
+            --arg title "$ARTICLE_TITLE" \
+            --arg summary "$ARTICLE_SUMMARY" \
+            '{
+              "content": "**Nouvel Article généré par IA !**\n\n**Titre de l\'article :** \($title)\n\n**Résumé :** \($summary)"
+            }'
+          )
+        
+          curl -X POST -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK_URL"
