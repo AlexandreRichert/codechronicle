@@ -31,7 +31,7 @@ async function generate() {
   const titleMatch = response.choices[0].message.content.match(/title:\s*"(.*?)"/);
   const summaryMatch = response.choices[0].message.content.match(/summary:\s*"(.*?)"/);
 
-  if (process.env.GITHUB_TOKEN) {
+  if (process.env.GITHUB_ENV) {
     fs.appendFileSync(process.env.GITHUB_ENV, `ARTICLE_TITLE=${titleMatch ? titleMatch[1] : 'Titre non trouvé'}\n`);
     fs.appendFileSync(process.env.GITHUB_ENV, `ARTICLE_SUMMARY=${summaryMatch ? summaryMatch[1] : 'Résumé non trouvé'}\n`);
   }
