@@ -17,3 +17,9 @@ jobs:
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: node scripts/generate-article.js
+
+      - name : Sauvegarder l'arcticle en artefact
+        uses: actions/upload-artifact@v4
+        with:
+          name: article generer
+          path: blog/
