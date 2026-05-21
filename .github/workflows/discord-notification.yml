@@ -26,9 +26,9 @@ jobs:
           PAYLOAD=$(jq -n \
             --arg title "$ARTICLE_TITLE" \
             --arg summary "$ARTICLE_SUMMARY" \
-            '{
-              "content": "**Nouvel Article généré par IA !**\n\n**Titre de l\'article :** \($title)\n\n**Résumé :** \($summary)"
-            }'
+            '{ "content": "**Nouvel Article généré par IA !**\n\n**Titre de l'\''article :** \($title)\n\n**Résumé :** \($summary)""}'
           )
         
-          curl -X POST -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK_URL"
+          curl -sS -X POST "$DISCORD_WEBHOOK_URL" \
+            -H "Content-Type: application/json" \
+            -d "$PAYLOAD"
