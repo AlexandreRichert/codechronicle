@@ -13,9 +13,10 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Reprendre les informations de l'article
-        run : |
-          ARTICLE_TITLE=$(cat blog/article.md | grep -m 1 "^# " | sed 's/# //')
-          ARTICLE_SUMMARY=$(cat blog/article.md | grep -m 1 "^> " | sed 's/> //')
+        run: |
+          ARTICLE_FILE=$(ls -t blog/*.md | head -1)
+          ARTICLE_TITLE=$(grep "^title:" "$ARTICLE_FILE" | sed 's/^title: "//' | sed 's/"$//')
+          ARTICLE_SUMMARY=$(grep "^summary:" "$ARTICLE_FILE" | sed 's/^summary: "//' | sed 's/"$//')
           echo "ARTICLE_TITLE=$ARTICLE_TITLE" >> $GITHUB_ENV
           echo "ARTICLE_SUMMARY=$ARTICLE_SUMMARY" >> $GITHUB_ENV
 
