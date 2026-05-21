@@ -1,9 +1,12 @@
 name: Générer un article IA et Commenter
+
 on:
   pull_request:
     types: [opened, synchronize]
     branches: 
       - main
+
+  workflow_dispatch:
 
 permissions:
   contents: write
