@@ -1,0 +1,19 @@
+name: Générer un article IA 
+on:
+  pull_request:
+    branches: 
+      - main
+jobs: 
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dépendances
+        run: npm install
+
+      - name: Générer l'article avec la clé d'OpenAI
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: node scripts/generate-article.js
