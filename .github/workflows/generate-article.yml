@@ -54,5 +54,5 @@ jobs:
       - name: Sauvegarder l'article en artefact
         uses: actions/upload-artifact@v4
         with:
-          name: article généré
+          name: article genere
           path: blog/
