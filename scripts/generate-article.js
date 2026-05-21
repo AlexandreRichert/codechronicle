@@ -27,6 +27,14 @@ async function generate() {
 
   fs.writeFileSync(`./blog/${target}`, response.choices[0].message.content);
   console.log(`Article généré dans ${target}`);
+
+  const titleMatch = response.choices[0].message.content.match(/title:\s*"(.*?)"/);
+  const summaryMatch = response.choices[0].message.content.match(/summary:\s*"(.*?)"/);
+
+  if (process.env.GITHUB_TOKEN) {
+    fs.appendFileSync(process.env.GITHUB_ENV, `ARTICLE_TITLE=${titleMatch ? titleMatch[1] : 'Titre non trouvé'}\n`);
+    fs.appendFileSync(process.env.GITHUB_ENV, `ARTICLE_SUMMARY=${summaryMatch ? summaryMatch[1] : 'Résumé non trouvé'}\n`);
+  }
 }
 
 generate();
