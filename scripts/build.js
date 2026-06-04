@@ -1,6 +1,7 @@
+import { marked } from 'marked';
+
 const fs = require('fs');
 const path = require('path');
-const { marked } = require('marked');
 const fm = require('front-matter');
 
 const blogDir = path.join(__dirname, '../blog');
