@@ -1,4 +1,3 @@
-```
 ---
 title: "Les bases de GitHub"
 summary: "Cet article présente les fondamentaux de GitHub, une plateforme essentielle pour la gestion de version et la collaboration dans le développement de logiciels."
@@ -77,4 +76,3 @@ git push origin nom_de_votre_branche
 ## Conclusion
 
 GitHub est un outil puissant pour le développement logiciel, offrant une multitude de fonctionnalités qui facilitent la collaboration et la gestion de versions. En comprenant les bases de Git et GitHub, vous serez mieux équipé pour contribuer à des projets, qu'ils soient personnels ou open source. N'hésitez pas à explorer les nombreuses ressources disponibles en ligne pour approfondir vos connaissances et compétences sur cette plateforme incontournable.
-```
