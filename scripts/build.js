@@ -12,6 +12,11 @@ async function build() {
         fs.mkdirSync(publicDir);
     }
 
+    fs.copyFileSync(
+        path.join(__dirname, '../assets/style.css'),
+        path.join(publicDir, 'style.css')
+    );
+
     const files = fs
         .readdirSync(blogDir)
         .filter(

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Les bases de GitHub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav><a href="index.html">← Retour à l'accueil</a></nav>
+    <main>
+        <article>
+            <header>
+                <h1>Les bases de GitHub</h1>
+                <p><strong>Résumé :</strong> <em>Cet article présente les fondamentaux de GitHub, une plateforme essentielle pour la gestion de version et la collaboration dans le développement de logiciels.</em></p>
+            </header>
+            <section>
+                <h1>Introduction à GitHub</h1>
+<p>GitHub est une plateforme basée sur le système de contrôle de version Git, qui permet aux développeurs de gérer et de collaborer sur des projets de manière efficace. Que vous soyez un développeur novice ou expérimenté, comprendre les bases de GitHub est essentiel pour travailler sur des projets open source ou en équipe.</p>
+<h2>Qu&#39;est-ce que Git?</h2>
+<p>Avant de plonger dans GitHub, il est essentiel de comprendre Git, le système de gestion de versions qu&#39;il utilise. Git est un outil qui permet de suivre les modifications apportées aux fichiers dans un projet. Il facilite la collaboration en permettant à plusieurs utilisateurs de travailler sur les mêmes fichiers en même temps sans entrer en conflit.</p>
+<h2>Qu&#39;est-ce que GitHub?</h2>
+<p>GitHub est un service en ligne qui héberge des dépôts Git (repositories). Il offre une interface web et des fonctionnalités supplémentaires qui facilitent la gestion des projets. Les utilisateurs peuvent créer des dépôts publics ou privés, suivre les modifications, gérer les collaborations et même intégrer des outils tiers.</p>
+<h2>Les composants de GitHub</h2>
+<h3>1. Dépôt (Repository)</h3>
+<p>Un dépôt est l&#39;endroit où votre projet est stocké. Un dépôt GitHub contient tous les fichiers du projet ainsi que l&#39;historique de toutes les modifications apportées. Pour créer un dépôt, il suffit de cliquer sur le bouton &quot;New&quot; sur votre page d&#39;accueil GitHub.</p>
+<h3>2. Commit</h3>
+<p>Un commit enregistre les changements apportés au dépôt. Chaque commit a un message qui décrit ce qui a été modifié. Il est important de faire des commits fréquents avec des messages clairs pour suivre l&#39;évolution de votre projet.</p>
+<h3>3. Branches</h3>
+<p>Les branches permettent de travailler sur des fonctionnalités ou des corrections de bug en parallèle sans affecter la branche principale (généralement appelée <code>main</code> ou <code>master</code>). Une fois que les modifications sont prêtes, elles peuvent être fusionnées avec la branche principale à l&#39;aide d&#39;une demande de tirage (pull request).</p>
+<h3>4. Pull Request</h3>
+<p>Une pull request (ou PR) est un moyen de proposer des changements à un projet. Elle permet de discuter des modifications, de les examiner et de les approuver avant qu&#39;elles ne soient fusionnées dans la branche principale.</p>
+<h3>5. Fork</h3>
+<p>Le fork est une copie d&#39;un dépôt qui vous permet de modifier le projet sans affecter l&#39;original. C&#39;est une pratique courante dans les projets open source, car elle permet aux contributeurs d&#39;apporter des améliorations et de soumettre leurs modifications.</p>
+<h2>Utiliser GitHub</h2>
+<h3>Étape 1: Création d&#39;un compte</h3>
+<p>La première étape pour utiliser GitHub est de créer un compte sur <a href="https://github.com/">GitHub.com</a>. Une fois le compte créé, vous pouvez créer des dépôts, explorer des projets open source et collaborer avec d&#39;autres développeurs.</p>
+<h3>Étape 2: Création d&#39;un dépôt</h3>
+<p>Après vous être connecté, cliquez sur le bouton &quot;New&quot; pour créer un nouveau dépôt. Donnez-lui un nom, ajoutez une description et choisissez si vous voulez qu&#39;il soit public ou privé. Cliquez sur &quot;Create repository&quot; pour finaliser la création.</p>
+<h3>Étape 3: Cloner un dépôt</h3>
+<p>Pour travailler sur le code localement, vous pouvez cloner un dépôt. Cela se fait en utilisant la commande suivante dans votre terminal:</p>
+<pre><code class="language-bash">git clone https://github.com/username/repository.git
+</code></pre>
+<h3>Étape 4: Faire des modifications</h3>
+<p>Apportez vos modifications localement, puis enregistrez-les à l&#39;aide de la commande <code>git commit</code>:</p>
+<pre><code class="language-bash">git add .
+git commit -m &quot;Description des modifications&quot;
+</code></pre>
+<h3>Étape 5: Pousser les modifications</h3>
+<p>Après avoir fait un commit, vous pouvez pousser vos modifications vers GitHub:</p>
+<pre><code class="language-bash">git push origin nom_de_votre_branche
+</code></pre>
+<h2>Conclusion</h2>
+<p>GitHub est un outil puissant pour le développement logiciel, offrant une multitude de fonctionnalités qui facilitent la collaboration et la gestion de versions. En comprenant les bases de Git et GitHub, vous serez mieux équipé pour contribuer à des projets, qu&#39;ils soient personnels ou open source. N&#39;hésitez pas à explorer les nombreuses ressources disponibles en ligne pour approfondir vos connaissances et compétences sur cette plateforme incontournable.</p>
+
+            </section>
+            <footer>
+                <p>Tags : Git, GitHub, Développement</p>
+            </footer>
+        </article>
+    </main>
+</body>
+</html>
