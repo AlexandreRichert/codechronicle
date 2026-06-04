@@ -26,19 +26,18 @@ async function generate() {
       {
         role: 'user',
         content: `Rédige un article technique sur : "${prompt}". 
-      Tu dois obligatoirement commencer par ce bloc YAML exact au tout début:
-      title: "Titre de l'article",
-      summary: "Résumé court",
-      tags: ["tag1", "tag2"],
-      body: "Contenu de l'article en Markdown"
-      `,
+      Réponds UNIQUEMENT avec un objet JSON valide, sans bloc de code ni texte autour, au format suivant :
+      {
+        "title": "le titre",
+        "summary": "un résumé court",
+        "tags": ["tag1", "tag2"],
+        "body": "le contenu complet de l'article en Markdown"
+      }`,
       },
     ],
   })
 
   const content = JSON.parse(response.choices[0].message.content)
-  console.log(content)
-
   const article = [
     '---',
     `title: "${content.title.replace(/"/g, '\\"')}"`,
