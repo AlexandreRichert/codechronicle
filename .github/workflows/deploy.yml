@@ -1,0 +1,67 @@
+name: Build, Deploy & Notify Discord
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-and-notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout du repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dépendances
+        run: npm install
+
+      - name: Construire le site HTML
+        run: node scripts/build.js 
+
+      - name: Déploiement FTP (InfinityFree)
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./public/
+          server-dir: /htdocs/
+
+      - name: Préparer les infos de l'article pour Discord
+        run: |
+          # On cherche le dernier fichier markdown modifié
+          ARTICLE_FILE=$(ls -t blog/*.md | head -1)
+          
+          # On extrait le titre et le résumé
+          ARTICLE_TITLE=$(grep "^title:" "$ARTICLE_FILE" | sed 's/^title: "//' | sed 's/"$//')
+          ARTICLE_SUMMARY=$(grep "^summary:" "$ARTICLE_FILE" | sed 's/^summary: "//' | sed 's/"$//')
+          
+          # On récupère juste le nom du fichier pour créer l'URL finale
+          FILENAME=$(basename "$ARTICLE_FILE" .md)
+          
+          # On enregistre les variables pour l'étape suivante
+          echo "ARTICLE_TITLE=$ARTICLE_TITLE" >> $GITHUB_ENV
+          echo "ARTICLE_SUMMARY=$ARTICLE_SUMMARY" >> $GITHUB_ENV
+          
+          # N'OUBLIE PAS DE CHANGER L'URL CI-DESSOUS AVEC TON VRAI DOMAINE
+          echo "ARTICLE_URL=https://codechronicle.free.je/$FILENAME.html" >> $GITHUB_ENV
+
+      - name: Notification Discord
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          PAYLOAD=$(jq -n \
+            --arg title "$ARTICLE_TITLE" \
+            --arg summary "$ARTICLE_SUMMARY" \
+            --arg url "$ARTICLE_URL" \
+            '{ "content": "**Nouveau post en production !**\n\n**Titre :** \($title)\n**Résumé :** \($summary)\n**Lien :** \($url)" }'
+          )
+          
+          curl -sS -X POST "$DISCORD_WEBHOOK_URL" \
+            -H "Content-Type: application/json" \
+            -d "$PAYLOAD"
